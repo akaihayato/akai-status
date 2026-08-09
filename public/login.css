@@ -1,0 +1,2 @@
+[hidden]{display:none!important}.login{min-height:100vh;display:grid;place-content:center;justify-items:center;text-align:center;gap:14px;padding:24px}.login h1{margin:0;font-size:34px}.login p{color:#97a0af;max-width:420px}.login button,.logout{border:1px solid #252b37;border-radius:12px;background:#11151d;color:#f5f7fb;padding:12px 18px;font:inherit;cursor:pointer}.login button:hover,.logout:hover{border-color:#d54867}.login-error{color:#ff8298!important;min-height:1.4em}.logout{margin-left:auto;padding:8px 12px;font-size:13px}
+

@@ -1,37 +1,5 @@
-const labels={operational:"すべて正常に稼働しています",degraded:"一部サービスを確認中です",down:"サービス障害が発生しています",unknown:"監視データを準備しています"};
-const stateLabels={operational:"正常",degraded:"確認中",down:"障害",unknown:"未確認"};
-const fmt=value=>value==null?"—":`${value.toFixed(2)}%`;
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";import{getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";import{getFirestore,doc,getDoc}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const config={apiKey:"AIzaSyB5iKZkSevv5Ij5PwMjR087uDU4LbAT0cs",authDomain:"akai-status-10f49.firebaseapp.com",projectId:"akai-status-10f49",storageBucket:"akai-status-10f49.firebasestorage.app",messagingSenderId:"35980550629",appId:"1:35980550629:web:3dab523ca1cd38d575cf0c"},app=initializeApp(config),auth=getAuth(app),db=getFirestore(app);const labels={operational:"縺吶∋縺ｦ豁｣蟶ｸ縺ｫ遞ｼ蜒阪＠縺ｦ縺・∪縺・,degraded:"荳驛ｨ繧ｵ繝ｼ繝薙せ繧堤｢ｺ隱堺ｸｭ縺ｧ縺・,down:"繧ｵ繝ｼ繝薙せ髫懷ｮｳ縺檎匱逕溘＠縺ｦ縺・∪縺・,unknown:"逶｣隕悶ョ繝ｼ繧ｿ繧呈ｺ門ｙ縺励※縺・∪縺・},stateLabels={operational:"豁｣蟶ｸ",degraded:"遒ｺ隱堺ｸｭ",down:"髫懷ｮｳ",unknown:"譛ｪ遒ｺ隱・},fmt=v=>v==null?"窶・:`${v.toFixed(2)}%`;
+function bars(h){const a=h.slice(-48),e=Array.from({length:Math.max(0,48-a.length)},()=>'<i class="bar empty"></i>');return e.concat(a.map(x=>`<i class="bar ${x.ok?"":"bad"}" title="${new Date(x.at).toLocaleString("ja-JP")}"></i>`)).join("")}function endpoints(s){if(s.endpoints.length<2)return"";return`<div class="endpoints">${s.endpoints.map(e=>`<div class="endpoint"><span class="endpoint-label"><span class="dot ${e.state}"></span>${e.name}</span><span>HTTP ${e.statusCode??"窶・}</span></div>`).join("")}</div>`}function render(d){const o=document.querySelector("#overall");o.className=`overall ${d.overall}`;o.innerHTML=`<span class="dot"></span><span>${labels[d.overall]??labels.unknown}</span>`;document.querySelector("#services").innerHTML=d.services.map(s=>`<article class="card"><div class="top"><div><div class="name">${s.name}</div><div class="meta"><span>蠢懃ｭ・${s.latencyMs??"窶・} ms</span><span>${s.endpoints.length>1?`${s.endpoints.length} endpoints`:`HTTP ${s.statusCode??"窶・}`}</span></div></div><div class="state"><span class="dot ${s.state}"></span>${stateLabels[s.state]??stateLabels.unknown}</div></div>${endpoints(s)}<div class="history">${bars(s.history)}</div><div class="uptime"><div class="metric"><b>${fmt(s.uptime.day)}</b><span>驕主悉24譎る俣</span></div><div class="metric"><b>${fmt(s.uptime.week)}</b><span>驕主悉7譌･髢・/span></div><div class="metric"><b>${fmt(s.uptime.month)}</b><span>驕主悉30譌･髢・/span></div></div></article>`).join("");document.querySelector("#updated").textContent=`譛邨よ峩譁ｰ ${new Date(d.generatedAt).toLocaleString("ja-JP")}`}
+async function load(){const s=await getDoc(doc(db,"status","current"));if(!s.exists())throw Error();render(JSON.parse(s.data().payload))}document.querySelector("#login-button").onclick=async()=>{document.querySelector("#login-error").textContent="";try{await signInWithPopup(auth,new GoogleAuthProvider())}catch{document.querySelector("#login-error").textContent="繝ｭ繧ｰ繧､繝ｳ縺ｧ縺阪∪縺帙ｓ縺ｧ縺励◆縲・}};document.querySelector("#logout-button").onclick=()=>signOut(auth);onAuthStateChanged(auth,async u=>{document.querySelector("#login").hidden=!!u;document.querySelector("#dashboard").hidden=!u;if(!u)return;try{await load();setInterval(load,60000)}catch{await signOut(auth);document.querySelector("#login-error").textContent="縺薙・Google繧｢繧ｫ繧ｦ繝ｳ繝医↓縺ｯ髢ｲ隕ｧ讓ｩ髯舌′縺ゅｊ縺ｾ縺帙ｓ縲・}});
 
-function bars(history){
-  const items=history.slice(-48);
-  const empty=Array.from({length:Math.max(0,48-items.length)},()=>'<i class="bar empty"></i>');
-  return empty.concat(items.map(item=>`<i class="bar ${item.ok?"":"bad"}" title="${new Date(item.at).toLocaleString("ja-JP")}"></i>`)).join("");
-}
-
-function endpointList(service){
-  if(service.endpoints.length<2)return "";
-  return `<div class="endpoints">${service.endpoints.map(endpoint=>`<div class="endpoint"><span class="endpoint-label"><span class="dot ${endpoint.state}"></span>${endpoint.name}</span><span>HTTP ${endpoint.statusCode??"—"}</span></div>`).join("")}</div>`;
-}
-
-function render(data){
-  const overall=document.querySelector("#overall");
-  overall.className=`overall ${data.overall}`;
-  overall.innerHTML=`<span class="dot"></span><span>${labels[data.overall]??labels.unknown}</span>`;
-  document.querySelector("#services").innerHTML=data.services.map(service=>`<article class="card"><div class="top"><div><div class="name">${service.name}</div><div class="meta"><span>応答 ${service.latencyMs??"—"} ms</span><span>${service.endpoints.length>1?`${service.endpoints.length} endpoints`:`HTTP ${service.statusCode??"—"}`}</span></div></div><div class="state"><span class="dot ${service.state}"></span>${stateLabels[service.state]??stateLabels.unknown}</div></div>${endpointList(service)}<div class="history" aria-label="直近の稼働履歴">${bars(service.history)}</div><div class="uptime"><div class="metric"><b>${fmt(service.uptime.day)}</b><span>過去24時間</span></div><div class="metric"><b>${fmt(service.uptime.week)}</b><span>過去7日間</span></div><div class="metric"><b>${fmt(service.uptime.month)}</b><span>過去30日間</span></div></div></article>`).join("");
-  document.querySelector("#updated").textContent=`最終更新 ${new Date(data.generatedAt).toLocaleString("ja-JP")}`;
-}
-
-async function load(){
-  try{
-    const response=await fetch(`./status.json?v=${Date.now()}`,{cache:"no-store"});
-    if(!response.ok)throw new Error(`HTTP ${response.status}`);
-    render(await response.json());
-  }catch{
-    const overall=document.querySelector("#overall");
-    overall.className="overall down";
-    overall.innerHTML='<span class="dot"></span><span>監視データを取得できません</span>';
-  }
-}
-
-load();
-setInterval(load,60000);

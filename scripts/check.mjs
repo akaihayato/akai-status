@@ -49,4 +49,3 @@ const states=serviceResults.map(service=>service.state);
 const overall=states.includes("down")?"down":states.includes("degraded")?"degraded":states.every(state=>state==="operational")?"operational":"unknown";
 await writeFile(outputUrl,JSON.stringify({overall,generatedAt:now,services:serviceResults,history},null,2)+"\n");
 console.log(JSON.stringify(checks,null,2));
-

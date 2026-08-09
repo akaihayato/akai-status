@@ -1,14 +1,14 @@
 {
   "overall": "operational",
-  "generatedAt": 1786251383634,
+  "generatedAt": 1786251575781,
   "services": [
     {
       "id": "akaihayato-site",
       "name": "akaihayato.com",
       "state": "operational",
-      "lastCheckedAt": 1786251383634,
+      "lastCheckedAt": 1786251575781,
       "statusCode": null,
-      "latencyMs": 2170,
+      "latencyMs": 1920,
       "endpoints": [
         {
           "id": "akaihayato-home",
@@ -16,7 +16,7 @@
           "url": "https://akaihayato.com/",
           "state": "operational",
           "statusCode": 200,
-          "latencyMs": 2170
+          "latencyMs": 1920
         },
         {
           "id": "akaihayato-gallery",
@@ -24,7 +24,7 @@
           "url": "https://akaihayato.com/gallery",
           "state": "operational",
           "statusCode": 200,
-          "latencyMs": 1987
+          "latencyMs": 1843
         },
         {
           "id": "akaihayato-blog",
@@ -32,7 +32,7 @@
           "url": "https://akaihayato.com/blog",
           "state": "operational",
           "statusCode": 200,
-          "latencyMs": 1983
+          "latencyMs": 1832
         }
       ],
       "uptime": {
@@ -43,6 +43,10 @@
       "history": [
         {
           "at": 1786251383634,
+          "ok": true
+        },
+        {
+          "at": 1786251575781,
           "ok": true
         }
       ]
@@ -51,9 +55,9 @@
       "id": "links",
       "name": "Relay",
       "state": "operational",
-      "lastCheckedAt": 1786251383634,
+      "lastCheckedAt": 1786251575781,
       "statusCode": 200,
-      "latencyMs": 599,
+      "latencyMs": 582,
       "endpoints": [
         {
           "id": "links",
@@ -61,7 +65,7 @@
           "url": "https://link.akaihayato.com/",
           "state": "operational",
           "statusCode": 200,
-          "latencyMs": 599
+          "latencyMs": 582
         }
       ],
       "uptime": {
@@ -72,6 +76,10 @@
       "history": [
         {
           "at": 1786251383634,
+          "ok": true
+        },
+        {
+          "at": 1786251575781,
           "ok": true
         }
       ]
@@ -80,9 +88,9 @@
       "id": "image-upload",
       "name": "HushPic",
       "state": "operational",
-      "lastCheckedAt": 1786251383634,
+      "lastCheckedAt": 1786251575781,
       "statusCode": 200,
-      "latencyMs": 689,
+      "latencyMs": 315,
       "endpoints": [
         {
           "id": "image-upload",
@@ -90,7 +98,7 @@
           "url": "https://image-upload.akaihayato.com/",
           "state": "operational",
           "statusCode": 200,
-          "latencyMs": 689
+          "latencyMs": 315
         }
       ],
       "uptime": {
@@ -102,6 +110,10 @@
         {
           "at": 1786251383634,
           "ok": true
+        },
+        {
+          "at": 1786251575781,
+          "ok": true
         }
       ]
     },
@@ -109,9 +121,9 @@
       "id": "vrchatosc",
       "name": "VRCOSC Control",
       "state": "operational",
-      "lastCheckedAt": 1786251383634,
+      "lastCheckedAt": 1786251575781,
       "statusCode": 200,
-      "latencyMs": 624,
+      "latencyMs": 520,
       "endpoints": [
         {
           "id": "vrchatosc",
@@ -119,7 +131,7 @@
           "url": "https://vrchatosc.akaihayato.com/",
           "state": "operational",
           "statusCode": 200,
-          "latencyMs": 624
+          "latencyMs": 520
         }
       ],
       "uptime": {
@@ -130,6 +142,10 @@
       "history": [
         {
           "at": 1786251383634,
+          "ok": true
+        },
+        {
+          "at": 1786251575781,
           "ok": true
         }
       ]
@@ -140,11 +156,19 @@
       {
         "at": 1786251383634,
         "ok": true
+      },
+      {
+        "at": 1786251575781,
+        "ok": true
       }
     ],
     "akaihayato-gallery": [
       {
         "at": 1786251383634,
+        "ok": true
+      },
+      {
+        "at": 1786251575781,
         "ok": true
       }
     ],
@@ -152,11 +176,19 @@
       {
         "at": 1786251383634,
         "ok": true
+      },
+      {
+        "at": 1786251575781,
+        "ok": true
       }
     ],
     "links": [
       {
         "at": 1786251383634,
+        "ok": true
+      },
+      {
+        "at": 1786251575781,
         "ok": true
       }
     ],
@@ -164,11 +196,19 @@
       {
         "at": 1786251383634,
         "ok": true
+      },
+      {
+        "at": 1786251575781,
+        "ok": true
       }
     ],
     "vrchatosc": [
       {
         "at": 1786251383634,
+        "ok": true
+      },
+      {
+        "at": 1786251575781,
         "ok": true
       }
     ]

@@ -27,6 +27,7 @@ jobs:
         env:
           FIREBASE_MONITOR_EMAIL: ${{ secrets.FIREBASE_MONITOR_EMAIL }}
           FIREBASE_MONITOR_PASSWORD: ${{ secrets.FIREBASE_MONITOR_PASSWORD }}
+          STATUS_MONITOR_KEY: ${{ secrets.STATUS_MONITOR_KEY }}
         run: node scripts/check.mjs
       - uses: actions/configure-pages@v5
         with:
